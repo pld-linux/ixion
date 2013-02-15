@@ -1,0 +1,8 @@
+--- libixion_0.3.0/src/Makefile.am.orig	2011-11-01 23:48:02.000000000 +0100
++++ libixion_0.3.0/src/Makefile.am	2013-02-14 20:51:19.911837432 +0100
+@@ -24,4 +24,4 @@
+ ixion_test_LDADD = libixion/libixion-@IXION_API_VERSION@.la
+ ixion_test_CPPFLAGS = -I$(top_builddir)/lib/libixion/libixion.la
+ 
+-TESTS = $(top_srcdir)/test/ixion-parser-test.sh ixion-test
++TESTS = ../test/ixion-parser-test.sh ixion-test

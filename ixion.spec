@@ -5,15 +5,19 @@
 Summary:	Generic formula compulation library
 Summary(pl.UTF-8):	Ogólna biblioteka do obliczania wzorów
 Name:		ixion
-Version:	0.2.0
+Version:	0.3.0
 Release:	1
 License:	MIT
 Group:		Libraries
-Source0:	http://dev-www.libreoffice.org/src/%{name}-%{version}.tar.gz
-# Source0-md5:	0f63ee487fda8f21fafa767b3c447ac9
-URL:		http://kohei.us/2010/06/21/ixion-threaded-formula-calculation-library/
+Source0:	http://kohei.us/files/ixion/src/libixion_%{version}.tar.bz2
+# Source0-md5:	96a36a0016f968a5a7c4b167eeb1643b
+Patch0:		%{name}-am.patch
+URL:		http://gitorious.org/ixion/pages/Home
+BuildRequires:	autoconf >= 2.63
+BuildRequires:	automake
 BuildRequires:	boost-devel >= 1.36
 BuildRequires:	libstdc++-devel
+BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -71,10 +75,17 @@ Static ixion library.
 Statyczna biblioteka ixion.
 
 %prep
-%setup -q
+%setup -q -n libixion_%{version}
+%patch0 -p1
 
 %build
+%{__libtoolize}
+%{__aclocal} -I m4
+%{__autoconf}
+%{__automake}
 %configure \
+	boost_cv_lib_thread=yes \
+	boost_cv_lib_thread_LIBS="-lboost_thread -lboost_system" \
 	%{!?with_static_libs:--disable-static}
 
 %{__make}
@@ -96,20 +107,20 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog README
+%doc AUTHORS COPYING README
 %attr(755,root,root) %{_bindir}/ixion-parser
 %attr(755,root,root) %{_bindir}/ixion-sorter
-%attr(755,root,root) %{_libdir}/libixion-0.2.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libixion-0.2.so.0
+%attr(755,root,root) %{_libdir}/libixion-0.4.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libixion-0.4.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libixion-0.2.so
-%{_includedir}/libixion-0.2
-%{_pkgconfigdir}/ixion-0.2.pc
+%attr(755,root,root) %{_libdir}/libixion-0.4.so
+%{_includedir}/libixion-0.4
+%{_pkgconfigdir}/libixion-0.4.pc
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libixion-0.2.a
+%{_libdir}/libixion-0.4.a
 %endif
