@@ -9,6 +9,7 @@ Version:	0.5.0
 Release:	1
 License:	MIT
 Group:		Libraries
+#Source0Download: http://gitorious.org/ixion/pages/Download
 Source0:	http://kohei.us/files/ixion/src/libixion-%{version}.tar.bz2
 # Source0-md5:	ebaeab9ffe1e6bd68b2a20bfa430b3af
 Patch0:		%{name}-am.patch
