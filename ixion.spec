@@ -6,7 +6,7 @@ Summary:	Generic formula compulation library
 Summary(pl.UTF-8):	Ogólna biblioteka do obliczania wzorów
 Name:		ixion
 Version:	0.5.0
-Release:	2
+Release:	3
 License:	MIT
 Group:		Libraries
 #Source0Download: http://gitorious.org/ixion/pages/Download
