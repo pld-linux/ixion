@@ -5,21 +5,21 @@
 Summary:	Generic formula compulation library
 Summary(pl.UTF-8):	Ogólna biblioteka do obliczania wzorów
 Name:		ixion
-Version:	0.5.0
-Release:	3
+Version:	0.7.0
+Release:	1
 License:	MIT
 Group:		Libraries
 #Source0Download: http://gitorious.org/ixion/pages/Download
 Source0:	http://kohei.us/files/ixion/src/libixion-%{version}.tar.bz2
-# Source0-md5:	ebaeab9ffe1e6bd68b2a20bfa430b3af
+# Source0-md5:	000157117801f9507f34b26ba998c4d1
 Patch0:		%{name}-am.patch
 URL:		http://gitorious.org/ixion/pages/Home
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	boost-devel >= 1.36
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtool >= 2:1.5
-BuildRequires:	mdds-devel
+BuildRequires:	libtool >= 2:2
+BuildRequires:	mdds-devel >= 0.7.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -55,7 +55,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	boost-devel >= 1.36
 Requires:	libstdc++-devel
-Requires:	mdds-devel
+Requires:	mdds-devel >= 0.7.1
 
 %description devel
 This package contains the header files for developing applications
@@ -89,7 +89,8 @@ Statyczna biblioteka ixion.
 %configure \
 	boost_cv_lib_thread=yes \
 	boost_cv_lib_thread_LIBS="-lboost_thread -lboost_system" \
-	%{!?with_static_libs:--disable-static}
+	--disable-silent-rules \
+	%{?with_static_libs:--enable-static}
 
 %{__make}
 
@@ -113,17 +114,17 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING README
 %attr(755,root,root) %{_bindir}/ixion-parser
 %attr(755,root,root) %{_bindir}/ixion-sorter
-%attr(755,root,root) %{_libdir}/libixion-0.6.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libixion-0.6.so.0
+%attr(755,root,root) %{_libdir}/libixion-0.8.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libixion-0.8.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libixion-0.6.so
-%{_includedir}/libixion-0.6
-%{_pkgconfigdir}/libixion-0.6.pc
+%attr(755,root,root) %{_libdir}/libixion-0.8.so
+%{_includedir}/libixion-0.8
+%{_pkgconfigdir}/libixion-0.8.pc
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libixion-0.6.a
+%{_libdir}/libixion-0.8.a
 %endif
