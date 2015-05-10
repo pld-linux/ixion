@@ -5,21 +5,23 @@
 Summary:	Generic formula compulation library
 Summary(pl.UTF-8):	Ogólna biblioteka do obliczania wzorów
 Name:		ixion
-Version:	0.7.0
-Release:	3
+Version:	0.9.1
+Release:	1
 License:	MIT
 Group:		Libraries
-#Source0Download: http://gitorious.org/ixion/pages/Download
-Source0:	http://kohei.us/files/ixion/src/libixion-%{version}.tar.bz2
-# Source0-md5:	000157117801f9507f34b26ba998c4d1
-Patch0:		%{name}-am.patch
-URL:		http://gitorious.org/ixion/pages/Home
+#Source0Download: https://gitlab.com/ixion/ixion
+Source0:	http://kohei.us/files/ixion/src/libixion-%{version}.tar.xz
+# Source0-md5:	d292f6d62847f2305178459390842eac
+URL:		https://gitlab.com/ixion/ixion
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	boost-devel >= 1.36
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:2
-BuildRequires:	mdds-devel >= 0.7.1
+BuildRequires:	mdds-devel >= 0.12.0
+BuildRequires:	python >= 1:2.7.0
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -55,7 +57,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	boost-devel >= 1.36
 Requires:	libstdc++-devel
-Requires:	mdds-devel >= 0.7.1
+Requires:	mdds-devel >= 0.12.0
 
 %description devel
 This package contains the header files for developing applications
@@ -77,9 +79,20 @@ Static ixion library.
 %description static -l pl.UTF-8
 Statyczna biblioteka ixion.
 
+%package -n python-ixion
+Summary:	Python interface to ixion library
+Summary(pl.UTF-8):	Interfejs Pythona do biblioteki ixion
+Group:		Libraries/Python
+Requires:	%{name} = %{version}-%{release}
+
+%description -n python-ixion
+Python interface to ixion library.
+
+%description -n python-ixion -l pl.UTF-8
+Interfejs Pythona do biblioteki ixion.
+
 %prep
 %setup -q -n libixion-%{version}
-%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -87,8 +100,6 @@ Statyczna biblioteka ixion.
 %{__autoconf}
 %{__automake}
 %configure \
-	boost_cv_lib_thread=yes \
-	boost_cv_lib_thread_LIBS="-lboost_thread -lboost_system" \
 	--disable-silent-rules \
 	%{?with_static_libs:--enable-static}
 
@@ -100,6 +111,10 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/ixion.la
+%if %{with static_libs}
+%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/ixion.a
+%endif
 # obsoleted by pkg-config
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
@@ -114,17 +129,21 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING README
 %attr(755,root,root) %{_bindir}/ixion-parser
 %attr(755,root,root) %{_bindir}/ixion-sorter
-%attr(755,root,root) %{_libdir}/libixion-0.8.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libixion-0.8.so.0
+%attr(755,root,root) %{_libdir}/libixion-0.10.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libixion-0.10.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libixion-0.8.so
-%{_includedir}/libixion-0.8
-%{_pkgconfigdir}/libixion-0.8.pc
+%attr(755,root,root) %{_libdir}/libixion-0.10.so
+%{_includedir}/libixion-0.10
+%{_pkgconfigdir}/libixion-0.10.pc
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libixion-0.8.a
+%{_libdir}/libixion-0.10.a
 %endif
+
+%files -n python-ixion
+%defattr(644,root,root,755)
+%attr(755,root,root) %{py_sitedir}/ixion.so
