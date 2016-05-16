@@ -1,7 +1,7 @@
 #
 # Conditional build:
 %bcond_without	static_libs	# static library
-#
+
 Summary:	Generic formula compulation library
 Summary(pl.UTF-8):	Ogólna biblioteka do obliczania wzorów
 Name:		ixion
@@ -19,7 +19,9 @@ BuildRequires:	boost-devel >= 1.36
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:2
 BuildRequires:	mdds-devel >= 0.12.0
+BuildRequires:	pkgconfig
 BuildRequires:	python >= 1:2.7.0
+BuildRequires:	python-modules
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
