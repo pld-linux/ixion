@@ -1,0 +1,11 @@
+--- libixion-0.9.1/configure.ac~	2015-04-05 16:32:05.000000000 +0300
++++ libixion-0.9.1/configure.ac	2016-05-16 10:39:00.091308725 +0300
+@@ -79,7 +79,7 @@
+ fi
+ 
+ # Check for mdds.
+-PKG_CHECK_MODULES([MDDS],[mdds >= 0.12.0])
++PKG_CHECK_MODULES([MDDS],[mdds-1.0])
+ 
+ # Check for python.
+ PKG_CHECK_MODULES([PYTHON], [python >= 0.27.1])

@@ -6,19 +6,20 @@ Summary:	Generic formula compulation library
 Summary(pl.UTF-8):	Ogólna biblioteka do obliczania wzorów
 Name:		ixion
 Version:	0.9.1
-Release:	7
+Release:	8
 License:	MIT
 Group:		Libraries
 #Source0Download: https://gitlab.com/ixion/ixion
-Source0:	http://kohei.us/files/ixion/src/libixion-%{version}.tar.xz
+Source0:	http://kohei.us/files/ixion/src/lib%{name}-%{version}.tar.xz
 # Source0-md5:	d292f6d62847f2305178459390842eac
+Patch0:		mdds-1.0.patch
 URL:		https://gitlab.com/ixion/ixion
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	boost-devel >= 1.36
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:2
-BuildRequires:	mdds-devel >= 0.12.0
+BuildRequires:	mdds-devel >= 1.0
 BuildRequires:	pkgconfig
 BuildRequires:	python >= 1:2.7.0
 BuildRequires:	python-modules
@@ -94,7 +95,8 @@ Python interface to ixion library.
 Interfejs Pythona do biblioteki ixion.
 
 %prep
-%setup -q -n libixion-%{version}
+%setup -q -n lib%{name}-%{version}
+%patch0 -p1
 
 %build
 %{__libtoolize}
