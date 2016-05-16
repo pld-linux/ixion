@@ -1,0 +1,12 @@
+--- libixion-0.11.1/configure.ac.orig	2016-04-05 02:48:42.000000000 +0200
++++ libixion-0.11.1/configure.ac	2016-05-15 21:56:19.338952688 +0200
+@@ -94,8 +94,7 @@
+ AM_CONDITIONAL([BUILD_PYTHON], [test "x$enable_python" != "xno"])
+ AM_CONDITIONAL([OSX], [test "x$_os" = "xDarwin"])
+ 
+-CPPFLAGS="$CPPFLAGS -g -O2 -fvisibility=hidden -I/usr/local/include"
+-LDFLAGS="-L/usr/local/lib"
++CPPFLAGS="$CPPFLAGS -fvisibility=hidden"
+ 
+ BOOST_THREADS
+ BOOST_PROGRAM_OPTIONS

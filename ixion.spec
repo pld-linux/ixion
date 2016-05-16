@@ -5,24 +5,24 @@
 Summary:	Generic formula compulation library
 Summary(pl.UTF-8):	Ogólna biblioteka do obliczania wzorów
 Name:		ixion
-Version:	0.9.1
-Release:	8
-License:	MIT
+Version:	0.11.1
+Release:	1
+License:	MPL v2.0
 Group:		Libraries
 #Source0Download: https://gitlab.com/ixion/ixion
-Source0:	http://kohei.us/files/ixion/src/lib%{name}-%{version}.tar.xz
-# Source0-md5:	d292f6d62847f2305178459390842eac
-Patch0:		mdds-1.0.patch
+Source0:	http://kohei.us/files/ixion/src/libixion-%{version}.tar.xz
+# Source0-md5:	891fac2bb0d0e17382526649ed4ad9ea
+Patch0:		%{name}-flags.patch
 URL:		https://gitlab.com/ixion/ixion
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	boost-devel >= 1.36
-BuildRequires:	libstdc++-devel
+BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	libtool >= 2:2
-BuildRequires:	mdds-devel >= 1.0
+BuildRequires:	mdds-devel >= 1.2.0
 BuildRequires:	pkgconfig
-BuildRequires:	python >= 1:2.7.0
-BuildRequires:	python-modules
+BuildRequires:	python3 >= 1:3.2
+BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -60,7 +60,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	boost-devel >= 1.36
 Requires:	libstdc++-devel
-Requires:	mdds-devel >= 0.12.0
+Requires:	mdds-devel >= 1.2.0
 
 %description devel
 This package contains the header files for developing applications
@@ -82,20 +82,22 @@ Static ixion library.
 %description static -l pl.UTF-8
 Statyczna biblioteka ixion.
 
-%package -n python-ixion
-Summary:	Python interface to ixion library
-Summary(pl.UTF-8):	Interfejs Pythona do biblioteki ixion
+%package -n python3-ixion
+Summary:	Python 3 interface to ixion library
+Summary(pl.UTF-8):	Interfejs Pythona 3 do biblioteki ixion
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
+# python 2 is no longer supported
+Obsoletes:	python-ixion
 
-%description -n python-ixion
-Python interface to ixion library.
+%description -n python3-ixion
+Python 3 interface to ixion library.
 
-%description -n python-ixion -l pl.UTF-8
-Interfejs Pythona do biblioteki ixion.
+%description -n python3-ixion -l pl.UTF-8
+Interfejs Pythona 3 do biblioteki ixion.
 
 %prep
-%setup -q -n lib%{name}-%{version}
+%setup -q -n libixion-%{version}
 %patch0 -p1
 
 %build
@@ -115,9 +117,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/ixion.la
+%{__rm} $RPM_BUILD_ROOT%{py3_sitedir}/ixion.la
 %if %{with static_libs}
-%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/ixion.a
+%{__rm} $RPM_BUILD_ROOT%{py3_sitedir}/ixion.a
 %endif
 # obsoleted by pkg-config
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
@@ -130,24 +132,24 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING README
+%doc AUTHORS LICENSE README
 %attr(755,root,root) %{_bindir}/ixion-parser
 %attr(755,root,root) %{_bindir}/ixion-sorter
-%attr(755,root,root) %{_libdir}/libixion-0.10.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libixion-0.10.so.0
+%attr(755,root,root) %{_libdir}/libixion-0.11.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libixion-0.11.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libixion-0.10.so
-%{_includedir}/libixion-0.10
-%{_pkgconfigdir}/libixion-0.10.pc
+%attr(755,root,root) %{_libdir}/libixion-0.11.so
+%{_includedir}/libixion-0.11
+%{_pkgconfigdir}/libixion-0.11.pc
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libixion-0.10.a
+%{_libdir}/libixion-0.11.a
 %endif
 
-%files -n python-ixion
+%files -n python3-ixion
 %defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/ixion.so
+%attr(755,root,root) %{py3_sitedir}/ixion.so
