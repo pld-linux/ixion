@@ -136,7 +136,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS LICENSE README
+%doc AUTHORS ChangeLog LICENSE README
 %attr(755,root,root) %{_bindir}/ixion-parser
 %attr(755,root,root) %{_bindir}/ixion-sorter
 %attr(755,root,root) %{_libdir}/libixion-0.12.so.*.*.*
