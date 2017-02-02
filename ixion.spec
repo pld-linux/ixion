@@ -5,13 +5,13 @@
 Summary:	Generic formula compulation library
 Summary(pl.UTF-8):	Ogólna biblioteka do obliczania wzorów
 Name:		ixion
-Version:	0.12.0
-Release:	2
+Version:	0.12.2
+Release:	1
 License:	MPL v2.0
 Group:		Libraries
 #Source0Download: https://gitlab.com/ixion/ixion
 Source0:	http://kohei.us/files/ixion/src/libixion-%{version}.tar.xz
-# Source0-md5:	427da1c197c6d7eab954f88b5be0a952
+# Source0-md5:	50873fec72f7f74bb0c0c216ee092d32
 Patch0:		%{name}-flags.patch
 URL:		https://gitlab.com/ixion/ixion
 BuildRequires:	autoconf >= 2.63
