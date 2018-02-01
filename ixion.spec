@@ -5,13 +5,13 @@
 Summary:	Generic formula compulation library
 Summary(pl.UTF-8):	Ogólna biblioteka do obliczania wzorów
 Name:		ixion
-Version:	0.12.2
-Release:	2
+Version:	0.13.0
+Release:	1
 License:	MPL v2.0
 Group:		Libraries
 #Source0Download: https://gitlab.com/ixion/ixion
 Source0:	http://kohei.us/files/ixion/src/libixion-%{version}.tar.xz
-# Source0-md5:	50873fec72f7f74bb0c0c216ee092d32
+# Source0-md5:	ac362de0c03c97804f4ba5077b63b3ce
 Patch0:		%{name}-flags.patch
 URL:		https://gitlab.com/ixion/ixion
 BuildRequires:	autoconf >= 2.63
@@ -28,7 +28,7 @@ BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # __once_call, __once_callable non-function symbols
-%define		skip_post_check_so	libixion-0.12.so.*
+%define		skip_post_check_so	libixion-0.13.so.*
 
 %description
 Ixion aims to provide a library for calculating the results of formula
@@ -137,21 +137,22 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog LICENSE README
+%attr(755,root,root) %{_bindir}/ixion-formula-tokenizer
 %attr(755,root,root) %{_bindir}/ixion-parser
 %attr(755,root,root) %{_bindir}/ixion-sorter
-%attr(755,root,root) %{_libdir}/libixion-0.12.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libixion-0.12.so.0
+%attr(755,root,root) %{_libdir}/libixion-0.13.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libixion-0.13.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libixion-0.12.so
-%{_includedir}/libixion-0.12
-%{_pkgconfigdir}/libixion-0.12.pc
+%attr(755,root,root) %{_libdir}/libixion-0.13.so
+%{_includedir}/libixion-0.13
+%{_pkgconfigdir}/libixion-0.13.pc
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libixion-0.12.a
+%{_libdir}/libixion-0.13.a
 %endif
 
 %files -n python3-ixion
