@@ -23,12 +23,10 @@ BuildRequires:	mdds-devel >= 1.2.0
 BuildRequires:	pkgconfig
 BuildRequires:	python3 >= 1:3.4
 BuildRequires:	python3-devel >= 1:3.4
+BuildRequires:	rpmbuild(macros) >= 1.734
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-# __once_call, __once_callable non-function symbols
-%define		skip_post_check_so	libixion-0.13.so.*
 
 %description
 Ixion aims to provide a library for calculating the results of formula
