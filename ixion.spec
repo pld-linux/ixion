@@ -5,13 +5,13 @@
 Summary:	Generic formula compulation library
 Summary(pl.UTF-8):	Ogólna biblioteka do obliczania wzorów
 Name:		ixion
-Version:	0.14.0
+Version:	0.14.1
 Release:	1
 License:	MPL v2.0
 Group:		Libraries
 #Source0Download: https://gitlab.com/ixion/ixion
 Source0:	http://kohei.us/files/ixion/src/libixion-%{version}.tar.xz
-# Source0-md5:	45fe042cb8d8acee771815d8a27e8647
+# Source0-md5:	ab6b645987e4f3e2df2e4d5debace7f7
 Patch0:		%{name}-flags.patch
 URL:		https://gitlab.com/ixion/ixion
 BuildRequires:	autoconf >= 2.63
@@ -134,7 +134,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog LICENSE README
+%doc AUTHORS LICENSE
 %attr(755,root,root) %{_bindir}/ixion-formula-tokenizer
 %attr(755,root,root) %{_bindir}/ixion-parser
 %attr(755,root,root) %{_bindir}/ixion-sorter
