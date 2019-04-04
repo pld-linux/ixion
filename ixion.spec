@@ -5,13 +5,13 @@
 Summary:	Generic formula compulation library
 Summary(pl.UTF-8):	Ogólna biblioteka do obliczania wzorów
 Name:		ixion
-Version:	0.13.0
-Release:	2
+Version:	0.14.0
+Release:	1
 License:	MPL v2.0
 Group:		Libraries
 #Source0Download: https://gitlab.com/ixion/ixion
 Source0:	http://kohei.us/files/ixion/src/libixion-%{version}.tar.xz
-# Source0-md5:	ac362de0c03c97804f4ba5077b63b3ce
+# Source0-md5:	45fe042cb8d8acee771815d8a27e8647
 Patch0:		%{name}-flags.patch
 URL:		https://gitlab.com/ixion/ixion
 BuildRequires:	autoconf >= 2.63
@@ -19,7 +19,7 @@ BuildRequires:	automake >= 1:1.11
 BuildRequires:	boost-devel >= 1.36
 BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	libtool >= 2:2
-BuildRequires:	mdds-devel >= 1.2.0
+BuildRequires:	mdds-devel >= 1.4.0
 BuildRequires:	pkgconfig
 BuildRequires:	python3 >= 1:3.4
 BuildRequires:	python3-devel >= 1:3.4
@@ -138,19 +138,19 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/ixion-formula-tokenizer
 %attr(755,root,root) %{_bindir}/ixion-parser
 %attr(755,root,root) %{_bindir}/ixion-sorter
-%attr(755,root,root) %{_libdir}/libixion-0.13.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libixion-0.13.so.0
+%attr(755,root,root) %{_libdir}/libixion-0.14.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libixion-0.14.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libixion-0.13.so
-%{_includedir}/libixion-0.13
-%{_pkgconfigdir}/libixion-0.13.pc
+%attr(755,root,root) %{_libdir}/libixion-0.14.so
+%{_includedir}/libixion-0.14
+%{_pkgconfigdir}/libixion-0.14.pc
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libixion-0.13.a
+%{_libdir}/libixion-0.14.a
 %endif
 
 %files -n python3-ixion
