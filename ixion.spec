@@ -180,7 +180,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with apidocs}
 %files apidocs
 %defattr(644,root,root,755)
-%doc doc/_build/
+%doc doc/_build/{_static,cpp,overview,python,*.html,*.js}
 %endif
 
 %files -n python3-ixion
