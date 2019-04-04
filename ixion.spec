@@ -1,5 +1,6 @@
 #
 # Conditional build:
+%bcond_without	apidocs		# Sphinx documentation
 %bcond_without	static_libs	# static library
 
 Summary:	Generic formula compulation library
@@ -9,7 +10,7 @@ Version:	0.14.1
 Release:	1
 License:	MPL v2.0
 Group:		Libraries
-#Source0Download: https://gitlab.com/ixion/ixion
+#Source0Download: https://gitlab.com/ixion/ixion/raw/master/README.md
 Source0:	http://kohei.us/files/ixion/src/libixion-%{version}.tar.xz
 # Source0-md5:	ab6b645987e4f3e2df2e4d5debace7f7
 Patch0:		%{name}-flags.patch
@@ -26,6 +27,12 @@ BuildRequires:	python3-devel >= 1:3.4
 BuildRequires:	rpmbuild(macros) >= 1.734
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
+%if %{with apidocs}
+BuildRequires:	doxygen
+BuildRequires:	python3-breathe
+BuildRequires:	python3-sphinx_bootstrap_theme
+BuildRequires:	sphinx-pdg-3
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -60,8 +67,8 @@ Summary(pl.UTF-8):	Pliki nagłówkowe dla ixion
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	boost-devel >= 1.36
-Requires:	libstdc++-devel
-Requires:	mdds-devel >= 1.2.0
+Requires:	libstdc++-devel >= 6:4.7
+Requires:	mdds-devel >= 1.4.0
 
 %description devel
 This package contains the header files for developing applications
@@ -82,6 +89,17 @@ Static ixion library.
 
 %description static -l pl.UTF-8
 Statyczna biblioteka ixion.
+
+%package apidocs
+Summary:	API documentation for ixion library
+Summary(pl.UTF-8):	Dokumentacja API biblioteki ixion
+Group:		Documentation
+
+%description apidocs
+API documentation for ixion library.
+
+%description apidocs -l pl.UTF-8
+Dokumentacja API biblioteki ixion.
 
 %package -n python3-ixion
 Summary:	Python 3 interface to ixion library
@@ -113,9 +131,15 @@ Interfejs Pythona 3 do biblioteki ixion.
 
 %{__make}
 
+%if %{with apidocs}
+cd doc
+doxygen doxygen.conf
+sphinx-build-3 -b html . _build
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
@@ -151,6 +175,12 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libixion-0.14.a
+%endif
+
+%if %{with apidocs}
+%files apidocs
+%defattr(644,root,root,755)
+%doc doc/_build/
 %endif
 
 %files -n python3-ixion
