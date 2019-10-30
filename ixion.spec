@@ -6,13 +6,13 @@
 Summary:	Generic formula compulation library
 Summary(pl.UTF-8):	Ogólna biblioteka do obliczania wzorów
 Name:		ixion
-Version:	0.14.1
-Release:	4
+Version:	0.15.0
+Release:	1
 License:	MPL v2.0
 Group:		Libraries
 #Source0Download: https://gitlab.com/ixion/ixion/raw/master/README.md
 Source0:	http://kohei.us/files/ixion/src/libixion-%{version}.tar.xz
-# Source0-md5:	ab6b645987e4f3e2df2e4d5debace7f7
+# Source0-md5:	68edc5952ee1b172d83e5926ecc0554a
 Patch0:		%{name}-flags.patch
 URL:		https://gitlab.com/ixion/ixion
 BuildRequires:	autoconf >= 2.63
@@ -20,17 +20,18 @@ BuildRequires:	automake >= 1:1.11
 BuildRequires:	boost-devel >= 1.36
 BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	libtool >= 2:2
-BuildRequires:	mdds-devel >= 1.4.0
+BuildRequires:	mdds-devel >= 1.5.0
 BuildRequires:	pkgconfig
 BuildRequires:	python3 >= 1:3.4
 BuildRequires:	python3-devel >= 1:3.4
 BuildRequires:	rpmbuild(macros) >= 1.734
+BuildRequires:	spdlog-devel >= 0.16.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 %if %{with apidocs}
 BuildRequires:	doxygen
 BuildRequires:	python3-breathe
-BuildRequires:	python3-sphinx_bootstrap_theme
+BuildRequires:	python3-sphinx_rtd_theme
 BuildRequires:	sphinx-pdg-3
 %endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -68,7 +69,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	boost-devel >= 1.36
 Requires:	libstdc++-devel >= 6:4.7
-Requires:	mdds-devel >= 1.4.0
+Requires:	mdds-devel >= 1.5.0
 
 %description devel
 This package contains the header files for developing applications
@@ -162,19 +163,19 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/ixion-formula-tokenizer
 %attr(755,root,root) %{_bindir}/ixion-parser
 %attr(755,root,root) %{_bindir}/ixion-sorter
-%attr(755,root,root) %{_libdir}/libixion-0.14.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libixion-0.14.so.0
+%attr(755,root,root) %{_libdir}/libixion-0.15.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libixion-0.15.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libixion-0.14.so
-%{_includedir}/libixion-0.14
-%{_pkgconfigdir}/libixion-0.14.pc
+%attr(755,root,root) %{_libdir}/libixion-0.15.so
+%{_includedir}/libixion-0.15
+%{_pkgconfigdir}/libixion-0.15.pc
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libixion-0.14.a
+%{_libdir}/libixion-0.15.a
 %endif
 
 %if %{with apidocs}
