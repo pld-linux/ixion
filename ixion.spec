@@ -6,13 +6,13 @@
 Summary:	Generic formula compulation library
 Summary(pl.UTF-8):	Ogólna biblioteka do obliczania wzorów
 Name:		ixion
-Version:	0.15.0
-Release:	2
+Version:	0.16.1
+Release:	1
 License:	MPL v2.0
 Group:		Libraries
-#Source0Download: https://gitlab.com/ixion/ixion/raw/master/README.md
+#Source0Download: https://gitlab.com/ixion/ixion/-/releases
 Source0:	http://kohei.us/files/ixion/src/libixion-%{version}.tar.xz
-# Source0-md5:	68edc5952ee1b172d83e5926ecc0554a
+# Source0-md5:	6aef823752990d193e5cf80a87d0ef58
 Patch0:		%{name}-flags.patch
 URL:		https://gitlab.com/ixion/ixion
 BuildRequires:	autoconf >= 2.63
@@ -159,23 +159,23 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS LICENSE
+%doc AUTHORS ChangeLog LICENSE
 %attr(755,root,root) %{_bindir}/ixion-formula-tokenizer
 %attr(755,root,root) %{_bindir}/ixion-parser
 %attr(755,root,root) %{_bindir}/ixion-sorter
-%attr(755,root,root) %{_libdir}/libixion-0.15.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libixion-0.15.so.0
+%attr(755,root,root) %{_libdir}/libixion-0.16.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libixion-0.16.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libixion-0.15.so
-%{_includedir}/libixion-0.15
-%{_pkgconfigdir}/libixion-0.15.pc
+%attr(755,root,root) %{_libdir}/libixion-0.16.so
+%{_includedir}/libixion-0.16
+%{_pkgconfigdir}/libixion-0.16.pc
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libixion-0.15.a
+%{_libdir}/libixion-0.16.a
 %endif
 
 %if %{with apidocs}
