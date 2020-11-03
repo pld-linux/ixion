@@ -25,7 +25,6 @@ BuildRequires:	pkgconfig
 BuildRequires:	python3 >= 1:3.4
 BuildRequires:	python3-devel >= 1:3.4
 BuildRequires:	rpmbuild(macros) >= 1.734
-BuildRequires:	spdlog-devel >= 0.16.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 %if %{with apidocs}
