@@ -24,6 +24,7 @@ BuildRequires:	boost-devel >= 1.36
 BuildRequires:	libstdc++-devel >= 6:7
 BuildRequires:	libtool >= 2:2
 BuildRequires:	mdds-devel >= 2.0.0
+BuildRequires:	mdds-devel < 2.1
 BuildRequires:	pkgconfig
 BuildRequires:	python3 >= 1:3.4
 BuildRequires:	python3-devel >= 1:3.4
