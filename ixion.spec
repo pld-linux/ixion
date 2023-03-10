@@ -2,28 +2,32 @@
 # Conditional build:
 %bcond_without	apidocs		# Sphinx documentation
 %bcond_without	static_libs	# static library
+%bcond_with	vulkan		# Vulkan compute engine (vulkan_spirv_blobs.inl missing)
 
 Summary:	Generic formula compulation library
 Summary(pl.UTF-8):	Ogólna biblioteka do obliczania wzorów
 Name:		ixion
-Version:	0.16.1
-Release:	8
+# keep in sync with BuildRequires in liborcus.spec
+Version:	0.17.0
+Release:	1
 License:	MPL v2.0
 Group:		Libraries
 #Source0Download: https://gitlab.com/ixion/ixion/-/releases
 Source0:	http://kohei.us/files/ixion/src/libixion-%{version}.tar.xz
-# Source0-md5:	6aef823752990d193e5cf80a87d0ef58
+# Source0-md5:	bdb1aeaaf93dc0b4ffd0772d309a0f58
 Patch0:		%{name}-flags.patch
 URL:		https://gitlab.com/ixion/ixion
+%{?with_vulkan:BuildRequires:	Vulkan-Loader-devel >= 1.2.0}
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	boost-devel >= 1.36
-BuildRequires:	libstdc++-devel >= 6:4.7
+BuildRequires:	libstdc++-devel >= 6:7
 BuildRequires:	libtool >= 2:2
-BuildRequires:	mdds-devel >= 1.5.0
+BuildRequires:	mdds-devel >= 2.0.0
 BuildRequires:	pkgconfig
 BuildRequires:	python3 >= 1:3.4
 BuildRequires:	python3-devel >= 1:3.4
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.734
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
@@ -67,8 +71,8 @@ Summary(pl.UTF-8):	Pliki nagłówkowe dla ixion
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	boost-devel >= 1.36
-Requires:	libstdc++-devel >= 6:4.7
-Requires:	mdds-devel >= 1.5.0
+Requires:	libstdc++-devel >= 6:7
+Requires:	mdds-devel >= 2.0.0
 
 %description devel
 This package contains the header files for developing applications
@@ -94,6 +98,7 @@ Statyczna biblioteka ixion.
 Summary:	API documentation for ixion library
 Summary(pl.UTF-8):	Dokumentacja API biblioteki ixion
 Group:		Documentation
+BuildArch:	noarch
 
 %description apidocs
 API documentation for ixion library.
@@ -108,7 +113,7 @@ Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 Requires:	python3-libs >= 1:3.4
 # python 2 is no longer supported
-Obsoletes:	python-ixion
+Obsoletes:	python-ixion < 0.11
 
 %description -n python3-ixion
 Python 3 interface to ixion library.
@@ -124,10 +129,12 @@ Interfejs Pythona 3 do biblioteki ixion.
 %{__libtoolize}
 %{__aclocal} -I m4
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure \
 	--disable-silent-rules \
-	%{?with_static_libs:--enable-static}
+	%{?with_static_libs:--enable-static} \
+	%{?with_vulkan:--enable-vulkan}
 
 %{__make}
 
@@ -162,19 +169,19 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/ixion-formula-tokenizer
 %attr(755,root,root) %{_bindir}/ixion-parser
 %attr(755,root,root) %{_bindir}/ixion-sorter
-%attr(755,root,root) %{_libdir}/libixion-0.16.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libixion-0.16.so.0
+%attr(755,root,root) %{_libdir}/libixion-0.17.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libixion-0.17.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libixion-0.16.so
-%{_includedir}/libixion-0.16
-%{_pkgconfigdir}/libixion-0.16.pc
+%attr(755,root,root) %{_libdir}/libixion-0.17.so
+%{_includedir}/libixion-0.17
+%{_pkgconfigdir}/libixion-0.17.pc
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libixion-0.16.a
+%{_libdir}/libixion-0.17.a
 %endif
 
 %if %{with apidocs}
