@@ -9,7 +9,7 @@ Summary(pl.UTF-8):	Ogólna biblioteka do obliczania wzorów
 Name:		ixion
 # keep in sync with BuildRequires in liborcus.spec
 Version:	0.17.0
-Release:	1
+Release:	2
 License:	MPL v2.0
 Group:		Libraries
 #Source0Download: https://gitlab.com/ixion/ixion/-/releases
