@@ -8,13 +8,13 @@ Summary:	Generic formula compulation library
 Summary(pl.UTF-8):	Ogólna biblioteka do obliczania wzorów
 Name:		ixion
 # keep in sync with BuildRequires in liborcus.spec
-Version:	0.18.1
+Version:	0.19.0
 Release:	1
 License:	MPL v2.0
 Group:		Libraries
 #Source0Download: https://gitlab.com/ixion/ixion/-/releases
 Source0:	https://kohei.us/files/ixion/src/libixion-%{version}.tar.xz
-# Source0-md5:	329fd9d51cf8bf9246184e4100aa8538
+# Source0-md5:	d8ab30ff0652f965cf144a1382f58a62
 Patch0:		%{name}-flags.patch
 URL:		https://gitlab.com/ixion/ixion
 %{?with_vulkan:BuildRequires:	Vulkan-Loader-devel >= 1.2.0}
