@@ -124,7 +124,7 @@ Interfejs Pythona 3 do biblioteki ixion.
 
 %prep
 %setup -q -n libixion-%{version}
-%patch0 -p1
+%patch -P 0 -p1
 
 %build
 %{__libtoolize}
