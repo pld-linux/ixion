@@ -8,13 +8,13 @@ Summary:	Generic formula compulation library
 Summary(pl.UTF-8):	Ogólna biblioteka do obliczania wzorów
 Name:		ixion
 # keep in sync with BuildRequires in liborcus.spec
-Version:	0.19.0
-Release:	4
+Version:	0.20.0
+Release:	1
 License:	MPL v2.0
 Group:		Libraries
 #Source0Download: https://gitlab.com/ixion/ixion/-/releases
-Source0:	https://kohei.us/files/ixion/src/libixion-%{version}.tar.xz
-# Source0-md5:	d8ab30ff0652f965cf144a1382f58a62
+Source0:	https://gitlab.com/api/v4/projects/ixion%2Fixion/packages/generic/source/%{version}/libixion-%{version}.tar.xz
+# Source0-md5:	75b38bb8db5fce0a1e3108647f27b050
 Patch0:		%{name}-flags.patch
 URL:		https://gitlab.com/ixion/ixion
 %{?with_vulkan:BuildRequires:	Vulkan-Loader-devel >= 1.2.0}
@@ -23,8 +23,8 @@ BuildRequires:	automake >= 1:1.11
 BuildRequires:	boost-devel >= 1.36
 BuildRequires:	libstdc++-devel >= 6:7
 BuildRequires:	libtool >= 2:2
-BuildRequires:	mdds-devel >= 2.1.0
-BuildRequires:	mdds-devel < 2.2
+BuildRequires:	mdds-devel >= 2.1.99
+BuildRequires:	mdds-devel < 3.1
 BuildRequires:	pkgconfig
 BuildRequires:	python3 >= 1:3.4
 BuildRequires:	python3-devel >= 1:3.4
@@ -73,7 +73,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	boost-devel >= 1.36
 Requires:	libstdc++-devel >= 6:7
-Requires:	mdds-devel >= 2.1.0
+Requires:	mdds-devel >= 2.1.99
 
 %description devel
 This package contains the header files for developing applications
@@ -170,19 +170,19 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/ixion-formula-tokenizer
 %attr(755,root,root) %{_bindir}/ixion-parser
 %attr(755,root,root) %{_bindir}/ixion-sorter
-%attr(755,root,root) %{_libdir}/libixion-0.18.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libixion-0.18.so.0
+%attr(755,root,root) %{_libdir}/libixion-0.20.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libixion-0.20.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libixion-0.18.so
-%{_includedir}/libixion-0.18
-%{_pkgconfigdir}/libixion-0.18.pc
+%attr(755,root,root) %{_libdir}/libixion-0.20.so
+%{_includedir}/libixion-0.20
+%{_pkgconfigdir}/libixion-0.20.pc
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libixion-0.18.a
+%{_libdir}/libixion-0.20.a
 %endif
 
 %if %{with apidocs}
