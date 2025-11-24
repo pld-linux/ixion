@@ -35,7 +35,7 @@ BuildRequires:	xz
 %if %{with apidocs}
 BuildRequires:	doxygen
 BuildRequires:	python3-breathe
-BuildRequires:	python3-sphinx_rtd_theme
+BuildRequires:	python3-piccolo_theme
 BuildRequires:	sphinx-pdg-3
 %endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -171,11 +171,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/ixion-parser
 %attr(755,root,root) %{_bindir}/ixion-sorter
 %attr(755,root,root) %{_libdir}/libixion-0.20.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libixion-0.20.so.0
+%ghost %{_libdir}/libixion-0.20.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libixion-0.20.so
+%{_libdir}/libixion-0.20.so
 %{_includedir}/libixion-0.20
 %{_pkgconfigdir}/libixion-0.20.pc
 
