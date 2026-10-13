@@ -16,6 +16,7 @@ Group:		Libraries
 Source0:	https://gitlab.com/api/v4/projects/ixion%2Fixion/packages/generic/source/%{version}/libixion-%{version}.tar.xz
 # Source0-md5:	75b38bb8db5fce0a1e3108647f27b050
 Patch0:		%{name}-flags.patch
+Patch1:		%{name}-boost-update.patch
 URL:		https://gitlab.com/ixion/ixion
 %{?with_vulkan:BuildRequires:	Vulkan-Loader-devel >= 1.2.0}
 BuildRequires:	autoconf >= 2.63
@@ -23,8 +24,9 @@ BuildRequires:	automake >= 1:1.11
 BuildRequires:	boost-devel >= 1.36
 BuildRequires:	libstdc++-devel >= 6:7
 BuildRequires:	libtool >= 2:2
+# mdds-3.0 API
 BuildRequires:	mdds-devel >= 2.1.99
-BuildRequires:	mdds-devel < 3.1
+BuildRequires:	mdds-devel < 3.3
 BuildRequires:	pkgconfig
 BuildRequires:	python3 >= 1:3.4
 BuildRequires:	python3-devel >= 1:3.4
@@ -124,7 +126,8 @@ Interfejs Pythona 3 do biblioteki ixion.
 
 %prep
 %setup -q -n libixion-%{version}
-%patch -P 0 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 
 %build
 %{__libtoolize}
@@ -170,7 +173,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/ixion-formula-tokenizer
 %attr(755,root,root) %{_bindir}/ixion-parser
 %attr(755,root,root) %{_bindir}/ixion-sorter
-%attr(755,root,root) %{_libdir}/libixion-0.20.so.*.*.*
+%{_libdir}/libixion-0.20.so.*.*.*
 %ghost %{_libdir}/libixion-0.20.so.0
 
 %files devel
@@ -193,4 +196,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n python3-ixion
 %defattr(644,root,root,755)
-%attr(755,root,root) %{py3_sitedir}/ixion.so
+%{py3_sitedir}/ixion.so
